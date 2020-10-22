@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerTelaInicialView">
+   <children>
+      <HBox alignment="CENTER" layoutX="6.0" layoutY="6.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <MenuBar prefHeight="58.0" prefWidth="376.0">
+              <menus>
+                <Menu fx:id="menuAquivo" mnemonicParsing="false" text="Cadastros">
+                  <items>
+                    <MenuItem fx:id="menuItemContato" mnemonicParsing="false" onAction="#telaContatos" text="Contatos" />
+                        <MenuItem fx:id="menuItemTipoContato" mnemonicParsing="false" onAction="#telaTiposContatos" text="Tipos de Contato" />
+                        <MenuItem fx:id="menuItemUsuario" mnemonicParsing="false" onAction="#telasUsuarios" text="Usuários" />
+                        <MenuItem fx:id="menuItemCidades" mnemonicParsing="false" onAction="#telaCidades" text="Cidades" />
+                        <MenuItem fx:id="menuItemSair" mnemonicParsing="false" onAction="#sair" text="Sair" />
+                  </items>
+                </Menu>
+                <Menu fx:id="menuItemRelatorio" mnemonicParsing="false" text="Relatórios">
+                  <items>
+                        <MenuItem fx:id="menuItemRelContatos" mnemonicParsing="false" onAction="#listarContatos" text="Contas Geral" />
+                        <MenuItem fx:id="menuItemRelEnerec" mnemonicParsing="false" onAction="#listarEnderecos" text="Enereços" />
+                        <MenuItem fx:id="menuItemRelTelefones" mnemonicParsing="false" onAction="#listarTelefones" text="Telefones" />
+                        <MenuItem fx:id="menuItemRelTipoContatos" mnemonicParsing="false" onAction="#listarTiposContatos" text="TipoContatps" />
+                  </items>
+                </Menu>
+                <Menu fx:id="menuSobre" mnemonicParsing="false" text="Sobre">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+               <HBox.margin>
+                  <Insets top="8.0" />
+               </HBox.margin>
+            </MenuBar>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

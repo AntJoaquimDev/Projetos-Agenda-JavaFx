@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerContatoView">
+
+    <children>
+        <HBox alignment="CENTER" prefHeight="38.0" prefWidth="600.0" style="-fx-background-color: #00b6b6; -fx-border-color: #000000;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label fx:id="lblTitulo" text="Cadastrar Contatos" textFill="#0b07f0">
+                    <font>
+                        <Font name="System Bold Italic" size="24.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+        <AnchorPane layoutX="14.0" layoutY="38.0" prefHeight="193.0" prefWidth="600.0" style="-fx-background-color: #ffffff; -fx-border-color: #000000;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="38.0">
+            <children>
+                <JFXTextField fx:id="tfId" labelFloat="true" layoutX="36.0" layoutY="20.0" prefHeight="27.0" prefWidth="66.0" promptText="Id" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="699.0" AnchorPane.topAnchor="19.0">
+                    <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                    </font>
+                </JFXTextField>
+                <JFXTextField fx:id="tfDescricao" labelFloat="true" layoutX="135.0" layoutY="20.0" prefHeight="25.0" prefWidth="465.0" promptText="Nome Contato" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="134.0">
+                    <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                    </font>
+                </JFXTextField>
+            <JFXTextField fx:id="tfEndereco" labelFloat="true" layoutX="34.0" layoutY="55.0" prefHeight="25.0" prefWidth="436.0" promptText="Endereço" />
+            <JFXTextField fx:id="tfNum" labelFloat="true" layoutX="490.0" layoutY="54.0" prefHeight="25.0" prefWidth="108.0" promptText="Número" />
+            <ComboBox fx:id="cboxCidade" layoutX="34.0" layoutY="92.0" prefHeight="25.0" prefWidth="231.0" promptText="Cidade" />
+            <JFXTextField fx:id="tfUf" editable="false" layoutX="278.0" layoutY="92.0" prefHeight="25.0" prefWidth="66.0" promptText="UF" />
+            <JFXTextField fx:id="TfCep" editable="false" labelFloat="true" layoutX="370.0" layoutY="92.0" promptText="CEP" />
+            <JFXTextField fx:id="tfTelef1" layoutX="34.0" layoutY="130.0" promptText="Telefone (Cel)" />
+            <JFXTextField fx:id="tfTelef2" labelFloat="true" layoutX="185.0" layoutY="130.0" promptText="Telefone(Fixo)" />
+            <ComboBox fx:id="cboxTipoContato" layoutX="370.0" layoutY="130.0" prefHeight="25.0" prefWidth="231.0" promptText="Tipo de Contato" />
+            <JFXCheckBox fx:id="checkedAtivo" layoutX="652.0" layoutY="155.0" prefHeight="17.0" prefWidth="77.0" text="Ativo">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </JFXCheckBox>
+            <JFXDatePicker fx:id="dtNascimento" defaultColor="#0742d7" layoutX="615.0" layoutY="18.0" prefHeight="28.0" prefWidth="127.0" promptText="Data de Nascimento" AnchorPane.bottomAnchor="173.0" AnchorPane.leftAnchor="615.0" />
+            <JFXRadioButton fx:id="rbFemenino" layoutX="647.0" layoutY="96.0" prefHeight="17.0" prefWidth="106.0" text="Femenino" AnchorPane.leftAnchor="646.0">
+               <toggleGroup>
+                  <ToggleGroup fx:id="sexo" />
+               </toggleGroup>
+            </JFXRadioButton>
+            <RadioButton fx:id="rbMasculino" layoutX="661.0" layoutY="122.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="84.0" text="Masculino" toggleGroup="$sexo" AnchorPane.leftAnchor="660.0" />
+            <JFXTextField fx:id="txfEmail" labelFloat="true" layoutX="34.0" layoutY="172.0" prefHeight="25.0" prefWidth="298.0" promptText="Email">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </JFXTextField>
+
+            </children></AnchorPane>
+        <AnchorPane layoutX="56.0" layoutY="251.0" prefHeight="248.0" prefWidth="800.0" style="-fx-background-color: #00b6b6; -fx-border-color: #000000;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="251.0">
+            <children>
+                <HBox alignment="CENTER" layoutX="5.0" layoutY="13.0" prefHeight="42.0" prefWidth="592.0" style="-fx-background-color: #eeeeeb; -fx-background-radius: 10;" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="12.0">
+                    <children>
+                        <Button fx:id="btnNovo" mnemonicParsing="false" onAction="#incluirRegistro" prefHeight="36.0" prefWidth="108.0" style="-fx-background-radius: 10;" text="Novo">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../icones/CadastroNovo_32x32.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="btnSalvar" layoutX="245.0" layoutY="49.0" mnemonicParsing="false" onAction="#salvarRegistro" prefHeight="39.0" prefWidth="96.0" style="-fx-background-radius: 10;" text="Salvar">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../icones/CadastroSalvar_32x32.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnDeletar" layoutX="307.0" layoutY="49.0" mnemonicParsing="false" onAction="#deletarRegistro" prefHeight="40.0" prefWidth="106.0" style="-fx-background-radius: 10;" text="Deletar">
+                            <graphic>
+                                <ImageView fitHeight="30.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../icones/CadastroExcluir_32x32.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
+                <TextField fx:id="tfPesquisar" layoutX="83.0" layoutY="69.0" onKeyReleased="#filtrarRegistro" onMouseClicked="#atualizarListaClick" style="-fx-background-radius: 10;" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="60.0" />
+                <TableView fx:id="tbView" layoutX="12.0" layoutY="95.0" onKeyReleased="#moverTabela" onMouseClicked="#clicartabela" prefHeight="257.0" prefWidth="578.0" style="-fx-background-radius: 10;" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="100.0" />
+            </children></AnchorPane>
+    </children>
+
+</AnchorPane>
