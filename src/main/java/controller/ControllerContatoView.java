@@ -90,10 +90,7 @@ public class ControllerContatoView implements Initializable, IntCadastro {
     @FXML
     private JFXTextField txfEmail;
 
-    @FXML
-    void deletarRegistro(ActionEvent event) {
 
-    }
 
 
 
@@ -156,9 +153,11 @@ public class ControllerContatoView implements Initializable, IntCadastro {
 
     @FXML
     void salvarRegistro(ActionEvent event) {
+
+
         Contato contato = new Contato(); // criar contato A049
         if (objetoSelecionado != null) {
-            contato.setId(objetoSelecionado.getId());   // apenas isso para alterar Tipo contato
+            contato.setId(objetoSelecionado.getId());   // apenas isso para alterar contato
         }
 
         contato.setDescricao(tfDescricao.getText());
@@ -189,6 +188,16 @@ public class ControllerContatoView implements Initializable, IntCadastro {
             atualizarTabela();
         } else {
             Alerta.msgInformacao("Ocorreu errro ao Gravar registro ");
+        }
+    }
+
+    @FXML
+    void deletarRegistro(ActionEvent event) {
+        if ( Alerta.msgConfimarExclusao(tfDescricao.getText())){
+            dao.excluis(objetoSelecionado);
+            limparCamposFormes();
+            atualizarTabela();
+            Alerta.msgInformacao("Registro foi excluido com Sucesso.");
         }
 
 
