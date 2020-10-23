@@ -23,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -207,7 +208,7 @@ public class ControllerContatoView implements Initializable, IntCadastro {
         TableColumn<Contato, LocalDate> colunaNascimento = new TableColumn<>("Nascimento");
 
 
-        tbView.getColumns().addAll(colunaId, colunaDescricao,colunaTContato,colunaCidade,colunaNascimento);//
+        tbView.getColumns().addAll(colunaId, colunaDescricao, colunaTContato, colunaCidade, colunaNascimento);//
 
         colunaId.setCellValueFactory(new PropertyValueFactory("id"));
         colunaDescricao.setCellValueFactory(new PropertyValueFactory("descricao"));
@@ -221,19 +222,31 @@ public class ControllerContatoView implements Initializable, IntCadastro {
         colunaTContato.prefWidthProperty().bind(tbView.widthProperty().multiply(0.2));
         colunaCidade.prefWidthProperty().bind(tbView.widthProperty().multiply(0.2));
         colunaNascimento.prefWidthProperty().bind(tbView.widthProperty().multiply(0.15));
+
+        //formatdor de data DateTimeFormater
+        DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+
+        colunaNascimento.setCellFactory(tc -> new TableCell<Contato, LocalDate> () {
+            @Override
+            protected void updateItem(LocalDate data, boolean empty) {
+                super.updateItem(data, empty);
+                if (data != null) {
+                    setText(formatar.format(data));
+                }
+            }
+        });
     }
 
     @Override
     public void atualizarTabela() {
         observableList.clear();
         lista = dao.consultar(tfPesquisar.getText(), "Contato");
-        for (Contato t : lista) {
-            observableList.add(t);
+        for (Contato c : lista) {
+            observableList.addAll(c);
         }
-        //alimentar a tabela com os dados
         tbView.getItems().setAll(observableList);
         tbView.getSelectionModel().selectFirst();
-       // System.out.println("atualizou");
+
     }
 
     @Override
@@ -257,7 +270,8 @@ public class ControllerContatoView implements Initializable, IntCadastro {
                 rbFemenino.setSelected(true);
             }
             dtNascimento.setValue(objetoSelecionado.getNascimento());
-            //tem q instaciar um nono objeto tipoContto e cidade
+
+            //tem q instaciar um novo objeto tipoContto e cidade
             TipoContato tipoContatoSelecionado = new TipoContato();
             tipoContatoSelecionado.setId(objetoSelecionado.getTipoContato().getId());
             tipoContatoSelecionado.setDescricao(objetoSelecionado.getDescricao());
@@ -271,21 +285,23 @@ public class ControllerContatoView implements Initializable, IntCadastro {
             cidadeSelecionada.setCep(objetoSelecionado.getCidade().getCep());
             cboxCidade.getSelectionModel().selectFirst();
             cboxCidade.setValue(cidadeSelecionada);
-            System.out.println("setou");
+
         }
     }
 
     @Override
     public void limparCamposFormes() {
-
+        tfId.clear();
         tfDescricao.clear();
         tfEndereco.clear();
         tfNum.clear();
         tfTelef1.clear();
         tfTelef2.clear();
         txfEmail.clear();
+
         rbMasculino.setSelected(true);
         checkedAtivo.setSelected(true);
+
         cboxCidade.getSelectionModel().select(-1);
         cboxTipoContato.getSelectionModel().select(-1);
         tfDescricao.requestFocus();
