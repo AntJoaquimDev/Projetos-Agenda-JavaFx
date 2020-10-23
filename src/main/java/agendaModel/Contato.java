@@ -10,7 +10,7 @@ public class Contato implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id_Contato",nullable = false)
+    @Column(name ="id",nullable = false)
     private long id;
 
     @Column(name = "descricao", length = 100,nullable = false)
@@ -19,7 +19,7 @@ public class Contato implements Serializable {
     @Column(name = "endereco", length = 100,nullable = false)
     private String endereco;
 
-    @Column(name = "numeroResidencia", length = 4,nullable = false)
+    @Column(name = "numResidencia", length = 4,nullable = false)
     private int numero ;
 
     @OneToOne
@@ -36,7 +36,7 @@ public class Contato implements Serializable {
     @Column(name = "sexo", length = 2,nullable = false)
     private String sexo;
 
-    @Column(name = "dataNascimento", length = 100,nullable = false)
+    @Column(name = "nascimento", length = 100,nullable = false)
     private LocalDate nascimento;
 
     @Column(name = "telefone1", length = 11,nullable = true)

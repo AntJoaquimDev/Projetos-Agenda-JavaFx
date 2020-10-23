@@ -20,7 +20,7 @@
 
         <!-- Modo de persistências das tabelas -->
        <!-- <property name="hbm2ddl.auto">create</property>-->
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">update</property>
 
     </session-factory>
 </hibernate-configuration>

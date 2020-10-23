@@ -120,10 +120,10 @@ public class ControllerCidadesView implements Initializable,IntCadastro {
 
         tbView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-               colunaId.setCellValueFactory(new PropertyValueFactory<Cidade,Long>("id"));
-        colunaDescricao.setCellValueFactory(new PropertyValueFactory<Cidade,String>("descricao"));
-               colunaUf.setCellValueFactory(new PropertyValueFactory<Cidade,String>("uf"));
-              colunaCep.setCellValueFactory(new PropertyValueFactory<Cidade,String>("cep"));
+            colunaId.setCellValueFactory(new PropertyValueFactory<Cidade,Long>("id"));
+            colunaDescricao.setCellValueFactory(new PropertyValueFactory<Cidade,String>("descricao"));
+            colunaUf.setCellValueFactory(new PropertyValueFactory<Cidade,String>("uf"));
+            colunaCep.setCellValueFactory(new PropertyValueFactory<Cidade,String>("cep"));
 
     }
 

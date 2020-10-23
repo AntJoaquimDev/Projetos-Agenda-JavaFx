@@ -142,7 +142,7 @@ public class ControllerContatoView implements Initializable, IntCadastro {
         cboxCidade.setItems(comboBoxCidadeodao.comboBox("Cidade"));
         criarColunasTabela();
         atualizarTabela();
-        //seteCamposFormes();
+        seteCamposFormes();
         //carregar ocombox de uf e cep
         cboxCidade.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -201,26 +201,26 @@ public class ControllerContatoView implements Initializable, IntCadastro {
     public void criarColunasTabela() {
 
         TableColumn<Contato, Long> colunaId = new TableColumn<>("ID");
-        TableColumn<Contato, String> colunaDescricao = new TableColumn<>("Nome");
-        TableColumn<Contato, TipoContato> colunaTContato = new TableColumn<>("T Contato");
+        TableColumn<Contato, String> colunaDescricao = new TableColumn<>("Nome do Contato");
+        TableColumn<Contato, TipoContato> colunaTContato = new TableColumn<>("Tipo Contato");
         TableColumn<Contato, Cidade> colunaCidade = new TableColumn<>("Cidade");
         TableColumn<Contato, LocalDate> colunaNascimento = new TableColumn<>("Nascimento");
 
 
-        tbView.getColumns().addAll(colunaId, colunaDescricao);//,colunaTContato,colunaCidade,colunaNascimento
-
-        //Redimensionamento manual--> tamanhos tem q somar 0.100
-        colunaId.prefWidthProperty().bind(tbView.widthProperty().multiply(0.05));
-        colunaDescricao.prefWidthProperty().bind(tbView.widthProperty().multiply(0.40));
-        colunaTContato.prefWidthProperty().bind(tbView.widthProperty().multiply(0.20));
-        colunaCidade.prefWidthProperty().bind(tbView.widthProperty().multiply(0.20));
-        colunaNascimento.prefWidthProperty().bind(tbView.widthProperty().multiply(0.15));
+        tbView.getColumns().addAll(colunaId, colunaDescricao,colunaTContato,colunaCidade,colunaNascimento);//
 
         colunaId.setCellValueFactory(new PropertyValueFactory("id"));
         colunaDescricao.setCellValueFactory(new PropertyValueFactory("descricao"));
         colunaTContato.setCellValueFactory(new PropertyValueFactory("tipoContato"));
         colunaCidade.setCellValueFactory(new PropertyValueFactory("cidade"));
         colunaNascimento.setCellValueFactory(new PropertyValueFactory("nascimento"));
+
+        //Redimensionamento manual--> tamanhos tem q somar 0.100
+        colunaId.prefWidthProperty().bind(tbView.widthProperty().multiply(0.05));
+        colunaDescricao.prefWidthProperty().bind(tbView.widthProperty().multiply(0.4));
+        colunaTContato.prefWidthProperty().bind(tbView.widthProperty().multiply(0.2));
+        colunaCidade.prefWidthProperty().bind(tbView.widthProperty().multiply(0.2));
+        colunaNascimento.prefWidthProperty().bind(tbView.widthProperty().multiply(0.15));
     }
 
     @Override
@@ -228,10 +228,12 @@ public class ControllerContatoView implements Initializable, IntCadastro {
         observableList.clear();
         lista = dao.consultar(tfPesquisar.getText(), "Contato");
         for (Contato t : lista) {
-            tbView.getItems().setAll(observableList);
-            tbView.getSelectionModel().selectFirst();
+            observableList.add(t);
         }
-        System.out.println("atualizou");
+        //alimentar a tabela com os dados
+        tbView.getItems().setAll(observableList);
+        tbView.getSelectionModel().selectFirst();
+       // System.out.println("atualizou");
     }
 
     @Override
