@@ -94,10 +94,7 @@ public class ControllerContatoView implements Initializable, IntCadastro {
 
     }
 
-    @FXML
-    void incluirRegistro(ActionEvent event) {
-        limparCamposFormes();
-    }
+
 
     @FXML
     void clicartabela(MouseEvent event) {
@@ -129,9 +126,36 @@ public class ControllerContatoView implements Initializable, IntCadastro {
         atualizarTabela();
     }
 
+    // imp para acessar os mtd tipoContatodao
+    private ComboBoxGenericDao<TipoContato> comboBoxTipoContatodao = new ComboBoxGenericDao();
+    private ComboBoxGenericDao<Cidade> comboBoxCidadeodao = new ComboBoxGenericDao();
+
+    private CrudGernecDao<Contato> dao = new CrudGernecDao<>();
+    private List<Contato> lista;
+    private ObservableList<Contato> observableList = FXCollections.observableArrayList();
+    private Contato objetoSelecionado = new Contato();
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        lblTitulo.setText("Cadastro Contato");
+        cboxTipoContato.setItems(comboBoxTipoContatodao.comboBox("TipoContato"));
+        cboxCidade.setItems(comboBoxCidadeodao.comboBox("Cidade"));
+        criarColunasTabela();
+        atualizarTabela();
+        //seteCamposFormes();
+        //carregar ocombox de uf e cep
+        cboxCidade.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                tfUf.setText(cboxCidade.getSelectionModel().getSelectedItem().getUf());
+                TfCep.setText(cboxCidade.getSelectionModel().getSelectedItem().getCep());
+            }
+        });
+    }
+
     @FXML
     void salvarRegistro(ActionEvent event) {
-        Contato contato = new Contato();
+        Contato contato = new Contato(); // criar contato A049
         if (objetoSelecionado != null) {
             contato.setId(objetoSelecionado.getId());   // apenas isso para alterar Tipo contato
         }
@@ -167,32 +191,9 @@ public class ControllerContatoView implements Initializable, IntCadastro {
 
 
     }
-
-    // imp para acessar os mtd tipoContatodao
-    private ComboBoxGenericDao<TipoContato> comboBoxTipoContatodao = new ComboBoxGenericDao();
-    private ComboBoxGenericDao<Cidade> comboBoxCidadeodao = new ComboBoxGenericDao();
-    private CrudGernecDao<Contato> dao = new CrudGernecDao<>();
-    private List<Contato> lista;
-    private ObservableList<Contato> observableList = FXCollections.observableArrayList();
-    private Contato objetoSelecionado = new Contato();
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        lblTitulo.setText("Cadastro Contato");
-        cboxTipoContato.setItems(comboBoxTipoContatodao.comboBox("TipoContato"));
-        cboxCidade.setItems(comboBoxCidadeodao.comboBox("Cidade"));
-        criarColunasTabela();
-        atualizarTabela();
-        //seteCamposFormes();
-        //carregar ocombox de uf e cep
-        cboxCidade.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                tfUf.setText(cboxCidade.getSelectionModel().getSelectedItem().getUf());
-                TfCep.setText(cboxCidade.getSelectionModel().getSelectedItem().getCep());
-            }
-        });
-
+    @FXML
+    void incluirRegistro(ActionEvent event) {
+        limparCamposFormes();
     }
 
     @Override
