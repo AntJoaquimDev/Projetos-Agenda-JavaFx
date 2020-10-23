@@ -19,7 +19,7 @@ public class Contato implements Serializable {
     @Column(name = "endereco", length = 100,nullable = false)
     private String endereco;
 
-    @Column(name = "numeroResidencia", length = 8,nullable = false)
+    @Column(name = "numeroResidencia", length = 4,nullable = false)
     private int numero ;
 
     @OneToOne
