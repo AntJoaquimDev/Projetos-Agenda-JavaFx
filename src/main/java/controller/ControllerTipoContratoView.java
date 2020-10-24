@@ -4,6 +4,7 @@ import agendaDao.CrudGenecDao;
 import agendaDao.TipoContatoDao;
 import agendaModel.TipoContato;
 import agendaUtil.Alerta;
+import agendaUtil.ValidarCampo;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,7 +58,7 @@ public class ControllerTipoContratoView implements Initializable, IntCadastro {
         lblTitulo.setText("Cadastro Tipo Contato");
         ocultar();
         criarColunasTabela();
-
+        ValidarCampo.chegcarcampoVazio(tfDescricao);
         // tfDescricao.requestFocus();
         //atualizarTabela();
     }
