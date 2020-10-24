@@ -8,9 +8,10 @@ public class Alerta {
     static ButtonType btnConfirmar = new ButtonType("Confirmar");
     static ButtonType btnCancelar = new ButtonType("Cancelar");
     static boolean resposta;
+
     public  static void msgInformacao(String msg){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(msg+" Cadastrado Com Sucesso");
+        alert.setHeaderText("Informação do Cadastrado");
         alert.setContentText(msg);
         alert.showAndWait();
     }

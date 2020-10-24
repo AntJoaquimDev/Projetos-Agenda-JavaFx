@@ -1,7 +1,7 @@
 package controller;
 
 import agendaDao.ComboBoxGenericDao;
-import agendaDao.CrudGernecDao;
+import agendaDao.CrudGenecDao;
 import agendaModel.Cidade;
 import agendaModel.Contato;
 import agendaModel.TipoContato;
@@ -112,6 +112,7 @@ public class ControllerContatoView implements Initializable, IntCadastro {
     @FXML
     void filtrarRegistro(KeyEvent event) {
         atualizarTabela();
+        seteCamposFormes();
     }
 
     @FXML
@@ -128,7 +129,7 @@ public class ControllerContatoView implements Initializable, IntCadastro {
     private ComboBoxGenericDao<TipoContato> comboBoxTipoContatodao = new ComboBoxGenericDao();
     private ComboBoxGenericDao<Cidade> comboBoxCidadeodao = new ComboBoxGenericDao();
 
-    private CrudGernecDao<Contato> dao = new CrudGernecDao<>();
+    private CrudGenecDao<Contato> dao = new CrudGenecDao<>();
     private List<Contato> lista;
     private ObservableList<Contato> observableList = FXCollections.observableArrayList();
     private Contato objetoSelecionado = new Contato();
@@ -140,7 +141,7 @@ public class ControllerContatoView implements Initializable, IntCadastro {
         cboxCidade.setItems(comboBoxCidadeodao.comboBox("Cidade"));
         criarColunasTabela();
         atualizarTabela();
-        seteCamposFormes();
+        //seteCamposFormes();
         //carregar ocombox de uf e cep
         cboxCidade.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -193,13 +194,13 @@ public class ControllerContatoView implements Initializable, IntCadastro {
 
     @FXML
     void deletarRegistro(ActionEvent event) {
+
         if ( Alerta.msgConfimarExclusao(tfDescricao.getText())){
             dao.excluis(objetoSelecionado);
             limparCamposFormes();
             atualizarTabela();
             Alerta.msgInformacao("Registro foi excluido com Sucesso.");
         }
-
 
     }
     @FXML

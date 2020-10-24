@@ -7,7 +7,7 @@ public class UsuarioDao {
 
     public void salvar(Usuario tipo){
         try {
-            Session session = ConexaoDao.getSessionFcatory().openSession();
+            Session session = ConexaoBanco.getSessionFcatory().openSession();
             session.beginTransaction(); //iniciar transaçao
             session.merge(tipo); //pegar os dados do form
             session.getTransaction().commit(); //gravar no banco

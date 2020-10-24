@@ -1,6 +1,7 @@
 package controller;
 
-import agendaDao.CrudGernecDao;
+import agendaDao.CidadeDao;
+import agendaDao.CrudGenecDao;
 import agendaModel.Cidade;
 import agendaUtil.Alerta;
 import agendaUtil.UF;
@@ -47,7 +48,7 @@ public class ControllerCidadesView implements Initializable,IntCadastro {
     @FXML
     private TableView<Cidade> tbView;
 
-    private CrudGernecDao<Cidade> dao = new CrudGernecDao();
+    private CrudGenecDao<Cidade> dao = new CrudGenecDao();
     private ObservableList<Cidade> observableList = FXCollections.observableArrayList();
     private List<Cidade> lista;
     private Cidade objSelecionado = new Cidade();
@@ -62,16 +63,18 @@ public class ControllerCidadesView implements Initializable,IntCadastro {
    }
     @FXML
     void deletarRegistro(ActionEvent event) {
-        if (Alerta.msgConfimarExclusao(tfDescricao.getText())) {
-            dao.excluis(objSelecionado);
-            limparCamposFormes();
-            atualizarTabela();
-            Alerta.msgInformacao("Registro Excluído com Sucesso");
-        } else {
+        if (CidadeDao.liberarExlcusao(objSelecionado.getId())) {
 
+            if (Alerta.msgConfimarExclusao(tfDescricao.getText())) {
+                dao.excluis(objSelecionado);
+                limparCamposFormes();
+                atualizarTabela();
+                Alerta.msgInformacao("Registro Excluído com Sucesso");
+            }
+            }else {
+            Alerta.msgInformacao("Não Permitido \n Cidade ja ultilizada em outro Cadastro ");
         }
     }
-
     @FXML
     void incluirRegistro(ActionEvent event) {
         limparCamposFormes();

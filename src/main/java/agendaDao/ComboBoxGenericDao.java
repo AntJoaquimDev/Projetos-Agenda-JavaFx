@@ -1,6 +1,5 @@
 package agendaDao;
 
-import agendaModel.TipoContato;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.hibernate.Session;
@@ -15,7 +14,7 @@ public class ComboBoxGenericDao<TG> {
     public ObservableList<TG> comboBox(String nomeClasse) {
         // carregar list de contatos no combox A044 buscar inf no bancoDD
         List<TG> lista = new ArrayList<>();
-        Session session = ConexaoDao.getSessionFcatory().openSession();
+        Session session = ConexaoBanco.getSessionFcatory().openSession();
         session.beginTransaction();
         lista = session.createQuery("from "+ nomeClasse).getResultList();
         session.getTransaction().commit();

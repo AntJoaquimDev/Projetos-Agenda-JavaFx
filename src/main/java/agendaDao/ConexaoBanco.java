@@ -4,7 +4,7 @@ import agendaModel.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class ConexaoDao {
+public class ConexaoBanco {
 
     private static SessionFactory conexao = null;
     private static Configuration configuracao;

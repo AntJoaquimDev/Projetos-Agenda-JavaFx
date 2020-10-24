@@ -1,17 +1,16 @@
 package agendaDao;
 
-import agendaModel.TipoContato;
 import org.hibernate.Session;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CrudGernecDao<T> { //CRUD generico
+public class CrudGenecDao<T> { //CRUD generico
 
     public boolean salvar(T tipo) {
         // conectar e abrir uma conexao depois tem q feichar
         try {
-            Session session = ConexaoDao.getSessionFcatory().openSession();
+            Session session = ConexaoBanco.getSessionFcatory().openSession();
             session.beginTransaction(); //iniciar transaçao
             session.merge(tipo); //pegar os dados do form
             session.getTransaction().commit(); //gtavar no banco
@@ -29,7 +28,7 @@ public class CrudGernecDao<T> { //CRUD generico
     public List<T> consultar(String descricao, String nomeClasse) {
 
         List<T> lista = new ArrayList<>();
-        Session session = ConexaoDao.getSessionFcatory().openSession();
+        Session session = ConexaoBanco.getSessionFcatory().openSession();
         session.beginTransaction();
 
         // lista = session.createQuery("from TipoContato ").getResultList();
@@ -49,7 +48,7 @@ public class CrudGernecDao<T> { //CRUD generico
 
     public void excluis(T tipo) {
         try {
-            Session session = ConexaoDao.getSessionFcatory().openSession();
+            Session session = ConexaoBanco.getSessionFcatory().openSession();
             session.beginTransaction();
             session.delete(tipo);
             session.getTransaction().commit();
