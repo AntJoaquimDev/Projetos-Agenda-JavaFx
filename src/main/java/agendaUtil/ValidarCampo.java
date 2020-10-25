@@ -11,7 +11,7 @@ import java.util.List;
 
 // Aula 55 link https://youtu.be/tQNzBykBXDw
 public class ValidarCampo {
-    private static final Tooltip tooltip = new Tooltip("Campo Obrigatório");
+    private static final Tooltip tooltip = new Tooltip("Preencha os campos Obrigatório");
 
     public static boolean chegcarcampoVazio(Node... no) {
         List<Node> camposFalha = new ArrayList<>(); // se algum campo ficar em branco sera add na lista e mostra a msg

@@ -152,8 +152,8 @@ public class ControllerContatoView implements Initializable, IntCadastro {
 
     @FXML
     void salvarRegistro(ActionEvent event) {
-        if (ValidarCampo.chegcarcampoVazio(tfDescricao, tfEndereco, cboxCidade, cboxTipoContato, tfNascimento, tfNum,
-                dtNascimento, rbFemenino, rbMasculino, tfTelef1)) {
+        if (ValidarCampo.chegcarcampoVazio(tfDescricao, tfEndereco, cboxCidade, cboxTipoContato, tfNum,
+               tfTelef1)) {
 
             Contato contato = new Contato(); // criar contato A049
             if (objetoSelecionado != null) {
