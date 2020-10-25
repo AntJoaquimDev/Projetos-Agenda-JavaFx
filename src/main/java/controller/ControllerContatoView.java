@@ -6,6 +6,7 @@ import agendaModel.Cidade;
 import agendaModel.Contato;
 import agendaModel.TipoContato;
 import agendaUtil.Alerta;
+import agendaUtil.ValidarCampo;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRadioButton;
@@ -91,9 +92,6 @@ public class ControllerContatoView implements Initializable, IntCadastro {
     private JFXTextField txfEmail;
 
 
-
-
-
     @FXML
     void clicartabela(MouseEvent event) {
         seteCamposFormes();
@@ -154,48 +152,50 @@ public class ControllerContatoView implements Initializable, IntCadastro {
 
     @FXML
     void salvarRegistro(ActionEvent event) {
+        if (ValidarCampo.chegcarcampoVazio(tfDescricao, tfEndereco, cboxCidade, cboxTipoContato, tfNascimento, tfNum,
+                dtNascimento, rbFemenino, rbMasculino, tfTelef1)) {
 
+            Contato contato = new Contato(); // criar contato A049
+            if (objetoSelecionado != null) {
+                contato.setId(objetoSelecionado.getId());   // apenas isso para alterar contato
+            }
 
-        Contato contato = new Contato(); // criar contato A049
-        if (objetoSelecionado != null) {
-            contato.setId(objetoSelecionado.getId());   // apenas isso para alterar contato
-        }
+            contato.setDescricao(tfDescricao.getText());
+            contato.setEndereco(tfEndereco.getText());
+            contato.setNumero(Integer.parseInt(tfNum.getText()));
+            contato.setCidade(cboxCidade.getSelectionModel().getSelectedItem());
+            contato.setTipoContato(cboxTipoContato.getSelectionModel().getSelectedItem());
+            contato.setEmail(txfEmail.getText());
+            contato.setTelefone1(Long.parseLong(tfTelef1.getText()));
+            contato.setTelefone2(Long.parseLong(tfTelef2.getText()));
+            LocalDate dataNascimento = dtNascimento.getValue(); // converter data nascimento
+            contato.setNascimento(dataNascimento);
 
-        contato.setDescricao(tfDescricao.getText());
-        contato.setEndereco(tfEndereco.getText());
-        contato.setNumero(Integer.parseInt(tfNum.getText()));
-        contato.setCidade(cboxCidade.getSelectionModel().getSelectedItem());
-        contato.setTipoContato(cboxTipoContato.getSelectionModel().getSelectedItem());
-        contato.setEmail(txfEmail.getText());
-        contato.setTelefone1(Long.parseLong(tfTelef1.getText()));
-        contato.setTelefone2(Long.parseLong(tfTelef2.getText()));
-        LocalDate dataNascimento = dtNascimento.getValue(); // converter data nascimento
-        contato.setNascimento(dataNascimento);
+            if (checkedAtivo.isSelected()) {
+                contato.setAtivo(true);
+            } else {
+                contato.setAtivo(false);
+            }
 
-        if (checkedAtivo.isSelected()) {
-            contato.setAtivo(true);
-        } else {
-            contato.setAtivo(false);
-        }
-
-        if (rbMasculino.isSelected()) {
-            contato.setSexo("M");
-        } else {
-            contato.setSexo("F");
-        }
-        //salvando o contato no banco
-        if (dao.salvar(contato)) {
-            Alerta.msgInformacao("Registro gravado com Sucesso ");
-            atualizarTabela();
-        } else {
-            Alerta.msgInformacao("Ocorreu errro ao Gravar registro ");
+            if (rbMasculino.isSelected()) {
+                contato.setSexo("M");
+            } else {
+                contato.setSexo("F");
+            }
+            //salvando o contato no banco
+            if (dao.salvar(contato)) {
+                Alerta.msgInformacao("Registro gravado com Sucesso ");
+                atualizarTabela();
+            } else {
+                Alerta.msgInformacao("Ocorreu errro ao Gravar registro ");
+            }
         }
     }
 
     @FXML
     void deletarRegistro(ActionEvent event) {
 
-        if ( Alerta.msgConfimarExclusao(tfDescricao.getText())){
+        if (Alerta.msgConfimarExclusao(tfDescricao.getText())) {
             dao.excluis(objetoSelecionado);
             limparCamposFormes();
             atualizarTabela();
@@ -203,6 +203,7 @@ public class ControllerContatoView implements Initializable, IntCadastro {
         }
 
     }
+
     @FXML
     void incluirRegistro(ActionEvent event) {
         limparCamposFormes();
@@ -236,7 +237,7 @@ public class ControllerContatoView implements Initializable, IntCadastro {
         //formatdor de data DateTimeFormater
         DateTimeFormatter formatar = DateTimeFormatter.ofPattern("dd/MM/YYYY");
 
-        colunaNascimento.setCellFactory(tc -> new TableCell<Contato, LocalDate> () {
+        colunaNascimento.setCellFactory(tc -> new TableCell<Contato, LocalDate>() {
             @Override
             protected void updateItem(LocalDate data, boolean empty) {
                 super.updateItem(data, empty);
@@ -284,7 +285,7 @@ public class ControllerContatoView implements Initializable, IntCadastro {
             //tem q instaciar um novo objeto tipoContto e cidade
             TipoContato tipoContatoSelecionado = new TipoContato();
             tipoContatoSelecionado.setId(objetoSelecionado.getTipoContato().getId());
-            tipoContatoSelecionado.setDescricao(objetoSelecionado.getDescricao());
+            tipoContatoSelecionado.setDescricaoTipo(objetoSelecionado.getTipoContato().getDescricaoTipo());
             cboxTipoContato.getSelectionModel().selectFirst(); // selecionar no primeiro registro
             cboxTipoContato.setValue(tipoContatoSelecionado);
 
@@ -301,6 +302,7 @@ public class ControllerContatoView implements Initializable, IntCadastro {
 
     @Override
     public void limparCamposFormes() {
+        objetoSelecionado = null;
         tfId.clear();
         tfDescricao.clear();
         tfEndereco.clear();
@@ -308,6 +310,9 @@ public class ControllerContatoView implements Initializable, IntCadastro {
         tfTelef1.clear();
         tfTelef2.clear();
         txfEmail.clear();
+        tfUf.clear();
+        TfCep.clear();
+
 
         rbMasculino.setSelected(true);
         checkedAtivo.setSelected(true);

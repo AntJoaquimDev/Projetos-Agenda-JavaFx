@@ -37,12 +37,14 @@ public class ValidaExibeTooTip {
             Timeline objTime = (Timeline) fildBehavior.get(objBehavior);
                 //limpar frame e add tempo para mostrar
             objTime.getKeyFrames().clear();
-            objTime.getKeyFrames().add(new KeyFrame(new Duration(3)));
+            objTime.getKeyFrames().add(new KeyFrame(new Duration(1)));
 
 
         } catch (SecurityException | IllegalArgumentException | NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
     }
+    // validar Combox
+
 
 }

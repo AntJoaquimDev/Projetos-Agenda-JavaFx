@@ -5,6 +5,7 @@ import agendaDao.CrudGenecDao;
 import agendaModel.Cidade;
 import agendaUtil.Alerta;
 import agendaUtil.UF;
+import agendaUtil.ValidarCampo;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -82,26 +83,27 @@ public class ControllerCidadesView implements Initializable,IntCadastro {
 
     @FXML
     void salvarRegistro(ActionEvent event) {
-        Cidade objeto = new Cidade();
+        if (ValidarCampo.chegcarcampoVazio(tfDescricao,tfCep,cboxUf,cboxUf)) {
+            Cidade objeto = new Cidade();
 //     testar se o campo Id esta selecionado ou nao. se sim ele altera se nao ele inclui nova registro
-        if (objSelecionado != null) {
-            objeto.setId(objSelecionado.getId());   // apenas isso para alterar Tipo contato
-        }
-        objeto.setDescricao(tfDescricao.getText());
-        objeto.setCep(tfCep.getText());
-        objeto.setUf(cboxUf.getValue());
+            if (objSelecionado != null) {
+                objeto.setId(objSelecionado.getId());   // apenas isso para alterar Tipo contato
+            }
+            objeto.setDescricao(tfDescricao.getText());
+            objeto.setCep(tfCep.getText());
+            objeto.setUf(cboxUf.getValue());
 
-        if (dao.salvar(objeto)) {
-            Alerta.msgInformacao("Registro Gravado com Sucesso");
-        } else {
-            Alerta.msgInformacao("Erro ao tentar gravar o registro");
+            if (dao.salvar(objeto)) {
+                Alerta.msgInformacao("Registro Gravado com Sucesso");
+            } else {
+                Alerta.msgInformacao("Erro ao tentar gravar o registro");
+            }
+            lblTitulo.setText("Cidade Cadastrada ");
+            tfId.clear();
+            tfDescricao.clear();
+            atualizarTabela();
+            limparCamposFormes();
         }
-        lblTitulo.setText("Cidade Cadastrada ");
-        tfId.clear();
-        tfDescricao.clear();
-        atualizarTabela();
-        limparCamposFormes();
-
     }
 
     @Override

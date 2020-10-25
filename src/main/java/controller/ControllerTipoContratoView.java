@@ -58,7 +58,7 @@ public class ControllerTipoContratoView implements Initializable, IntCadastro {
         lblTitulo.setText("Cadastro Tipo Contato");
         ocultar();
         criarColunasTabela();
-        ValidarCampo.chegcarcampoVazio(tfDescricao);
+       // ValidarCampo.chegcarcampoVazio(tfDescricao);
         // tfDescricao.requestFocus();
         //atualizarTabela();
     }
@@ -86,22 +86,23 @@ public class ControllerTipoContratoView implements Initializable, IntCadastro {
 
     @FXML
     void salvarRegistro(ActionEvent event) {
-
-        TipoContato objeto = new TipoContato();
+        if (ValidarCampo.chegcarcampoVazio(tfDescricao)) {
+            TipoContato objeto = new TipoContato();
 //     testar se o campo Id esta selecionado ou nao. se sim ele altera se nao ele inclui nova registro
-        if (objSelecionado != null) {
-            objeto.setId(objSelecionado.getId());   // apenas isso para alterar Tipo contato
+            if (objSelecionado != null) {
+                objeto.setId(objSelecionado.getId());   // apenas isso para alterar Tipo contato
+            }
+            objeto.setDescricaoTipo(tfDescricao.getText());
+            if (dao.salvar(objeto)) {
+                Alerta.msgInformacao("Registro Gravado com Sucesso");
+            } else {
+                Alerta.msgInformacao("Erro ao tentar gravar o registro");
+            }
+            //lbltext1.setText("Tipo de Contato Cadastrado ");
+            tfId.clear();
+            tfDescricao.clear();
+            atualizarTabela();
         }
-        objeto.setDescricao(tfDescricao.getText());
-        if (dao.salvar(objeto)) {
-            Alerta.msgInformacao("Registro Gravado com Sucesso");
-        } else {
-            Alerta.msgInformacao("Erro ao tentar gravar o registro");
-        }
-        //lbltext1.setText("Tipo de Contato Cadastrado ");
-        tfId.clear();
-        tfDescricao.clear();
-        atualizarTabela();
     }
 
     @Override
@@ -138,7 +139,7 @@ public class ControllerTipoContratoView implements Initializable, IntCadastro {
         //pegar o objeto selecionado e preencher o form pelo index;;;;
         objSelecionado = tbView.getItems().get(tbView.getSelectionModel().getFocusedIndex());
         tfId.setText(String.valueOf(objSelecionado.getId()));
-        tfDescricao.setText(objSelecionado.getDescricao());
+        tfDescricao.setText(objSelecionado.getDescricaoTipo());
 
     }
 

@@ -12,7 +12,7 @@ public class TipoContato implements Serializable {
    private long id;
 
    @Column (name ="descricao",length = 100,nullable = false)
-    private String descricao;
+    private String descricaoTipo;
 
 
     public long getId() {
@@ -23,16 +23,16 @@ public class TipoContato implements Serializable {
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescricaoTipo() {
+        return descricaoTipo;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescricaoTipo(String descricaoTipo) {
+        this.descricaoTipo = descricaoTipo;
     }
 
     @Override // para listar dados na combox. controleTipo. A044
     public String toString() {
-        return descricao ;
+        return descricaoTipo ;
     }
 }
