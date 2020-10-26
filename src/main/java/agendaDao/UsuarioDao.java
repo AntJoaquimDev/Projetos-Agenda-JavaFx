@@ -5,7 +5,7 @@ import org.hibernate.Session;
 
 public class UsuarioDao {
 
-    public void salvar(Usuario tipo){
+    public boolean salvar(Usuario tipo){
         try {
             Session session = ConexaoBanco.getSessionFcatory().openSession();
             session.beginTransaction(); //iniciar transaçao
@@ -17,6 +17,7 @@ public class UsuarioDao {
         }catch (Exception e){
             System.out.println("Errro" + e);
         }
+        return false;
     }
 
 }

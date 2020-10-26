@@ -4,6 +4,8 @@ import agendaDao.UsuarioDao;
 import agendaModel.Contato;
 import agendaModel.TipoContato;
 import agendaModel.Usuario;
+import agendaUtil.Alerta;
+import agendaUtil.ValidarCampo;
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -70,17 +72,27 @@ public class ControllerUsuarioView implements Initializable {
 
     @FXML
     void salvarRegistro(ActionEvent event) {
+        if (ValidarCampo.chegcarcampoVazio(tfUsuario)) {
+            Usuario objeto = new Usuario();
+//     testar se o campo Id esta selecionado ou nao. se sim ele altera se nao ele inclui nova registro
+            if (objeto != null) {
+                objeto.setId(objeto.getId());   // apenas isso para alterar Tipo contato
+            }
+            objeto.getDescricao(tfUsuario.getText());
+            if (dao.salvar(objeto)) {
+                Alerta.msgInformacao("Registro Gravado com Sucesso");
+            } else {
+                Alerta.msgInformacao("Erro ao tentar gravar o registro");
+            }
+            //lbltext1.setText("Tipo de Contato Cadastrado ");
+            tfId.clear();
+            tfUsuario.clear();
 
-        Usuario usuario = new Usuario();
-        usuario.setDescricao(tfUsuario.getText());
-        usuario.setSenha(tfSenha.getText());
-        dao.salvar(usuario);
-
-
+        }
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-            lblTitulo.setText("Cadastro Usuário");
+        lblTitulo.setText("Cadastro Usuário");
     }
 
     public void cliccarTabela(MouseEvent mouseEvent) {

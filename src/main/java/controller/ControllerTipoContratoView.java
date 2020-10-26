@@ -63,19 +63,7 @@ public class ControllerTipoContratoView implements Initializable, IntCadastro {
         //atualizarTabela();
     }
 
-    @FXML
-    void deletarRegistro(ActionEvent event) {
-        if (TipoContatoDao.liberarExlcusao(objSelecionado.getId())) {
-            if (Alerta.msgConfimarExclusao(tfDescricao.getText())) {
-                dao.excluis(objSelecionado);
-                limparCamposFormes();
-                atualizarTabela();
-                Alerta.msgInformacao("Registro Excluído com Sucesso");
-            }
-        } else {
-            Alerta.msgInformacao("Não Permitido. \n Cidade ja ultilizada em outro Cadastro");
-        }
-    }
+
 
     @FXML
     void incluirRegistro(ActionEvent event) {
@@ -104,7 +92,19 @@ public class ControllerTipoContratoView implements Initializable, IntCadastro {
             atualizarTabela();
         }
     }
-
+    @FXML
+    void deletarRegistro(ActionEvent event) {
+        if (TipoContatoDao.liberarExlcusao(objSelecionado.getId())) {
+            if (Alerta.msgConfimarExclusao(tfDescricao.getText())) {
+                dao.excluis(objSelecionado);
+                limparCamposFormes();
+                atualizarTabela();
+                Alerta.msgInformacao("Registro Excluído com Sucesso");
+            }
+        } else {
+            Alerta.msgInformacao("Não Permitido. \n Cidade ja ultilizada em outro Cadastro");
+        }
+    }
     @Override
     public void criarColunasTabela() {
 
@@ -118,7 +118,7 @@ public class ControllerTipoContratoView implements Initializable, IntCadastro {
         tbView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         colunaId.setCellValueFactory(new PropertyValueFactory<TipoContato, Long>("id"));
-        colunaDescricao.setCellValueFactory(new PropertyValueFactory<TipoContato, String>("descricao"));
+        colunaDescricao.setCellValueFactory(new PropertyValueFactory<TipoContato, String>("descricaoTipo"));
     }
 
     @Override
@@ -139,7 +139,7 @@ public class ControllerTipoContratoView implements Initializable, IntCadastro {
         //pegar o objeto selecionado e preencher o form pelo index;;;;
         objSelecionado = tbView.getItems().get(tbView.getSelectionModel().getFocusedIndex());
         tfId.setText(String.valueOf(objSelecionado.getId()));
-        tfDescricao.setText(objSelecionado.getDescricaoTipo());
+        tfDescricao.setText(String.valueOf(objSelecionado.getDescricaoTipo()));
 
     }
 
@@ -147,7 +147,7 @@ public class ControllerTipoContratoView implements Initializable, IntCadastro {
     public void limparCamposFormes() {
         objSelecionado = null;
         lista.clear();
-        lbltext1.setText("");
+       //lbltext1.setText("");
         tfId.clear();
         tfDescricao.clear();
         tfDescricao.requestFocus();

@@ -27,7 +27,7 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public String getDescricao() {
+    public String getDescricao(String text) {
         return descricao;
     }
 
@@ -42,4 +42,5 @@ public class Usuario implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
 }
