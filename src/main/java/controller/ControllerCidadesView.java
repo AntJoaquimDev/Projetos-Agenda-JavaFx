@@ -4,6 +4,7 @@ import agendaDao.CidadeDao;
 import agendaDao.CrudGenecDao;
 import agendaModel.Cidade;
 import agendaUtil.Alerta;
+import agendaUtil.MascarsCampo;
 import agendaUtil.UF;
 import agendaUtil.ValidarCampo;
 import com.jfoenix.controls.JFXTextField;
@@ -61,6 +62,7 @@ public class ControllerCidadesView implements Initializable,IntCadastro {
        criarColunasTabela();
        cboxUf.setItems(UF.gerarUF());
        atualizarTabela();
+       mascaCampos();
    }
     @FXML
     void deletarRegistro(ActionEvent event) {
@@ -206,5 +208,9 @@ public class ControllerCidadesView implements Initializable,IntCadastro {
     public void ativar(){
         tfId.setDisable(false);
         tfDescricao.setDisable(false);
+    }
+    public void mascaCampos(){
+        MascarsCampo.mskNumero(tfCep);
+
     }
 }

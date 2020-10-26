@@ -6,6 +6,7 @@ import agendaModel.Cidade;
 import agendaModel.Contato;
 import agendaModel.TipoContato;
 import agendaUtil.Alerta;
+import agendaUtil.MascarsCampo;
 import agendaUtil.ValidarCampo;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -148,6 +149,7 @@ public class ControllerContatoView implements Initializable, IntCadastro {
                 TfCep.setText(cboxCidade.getSelectionModel().getSelectedItem().getCep());
             }
         });
+        mascaCampos();
     }
 
     @FXML
@@ -320,5 +322,11 @@ public class ControllerContatoView implements Initializable, IntCadastro {
         cboxCidade.getSelectionModel().select(-1);
         cboxTipoContato.getSelectionModel().select(-1);
         tfDescricao.requestFocus();
+    }
+    public void mascaCampos(){
+        MascarsCampo.mskNumero(tfNum);
+        MascarsCampo.mskNumero(tfTelef1);
+        MascarsCampo.mskNumero(tfTelef2);
+
     }
 }
