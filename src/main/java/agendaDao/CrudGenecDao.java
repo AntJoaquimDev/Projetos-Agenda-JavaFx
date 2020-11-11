@@ -46,7 +46,7 @@ public class CrudGenecDao<T> { //CRUD generico
         return lista;
     }
 
-    public void excluis(T tipo) {
+    public void excluir(T tipo) {
         try {
             Session session = ConexaoBanco.getSessionFcatory().openSession();
             session.beginTransaction();

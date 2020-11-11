@@ -80,6 +80,7 @@ public class ControllerTipoContratoView implements Initializable, IntCadastro {
             if (objSelecionado != null) {
                 objeto.setId(objSelecionado.getId());   // apenas isso para alterar Tipo contato
             }
+
             objeto.setDescricaoTipo(tfDescricao.getText());
             if (dao.salvar(objeto)) {
                 Alerta.msgInformacao("Registro Gravado com Sucesso");
@@ -96,7 +97,7 @@ public class ControllerTipoContratoView implements Initializable, IntCadastro {
     void deletarRegistro(ActionEvent event) {
         if (TipoContatoDao.liberarExlcusao(objSelecionado.getId())) {
             if (Alerta.msgConfimarExclusao(tfDescricao.getText())) {
-                dao.excluis(objSelecionado);
+                dao.excluir(objSelecionado);
                 limparCamposFormes();
                 atualizarTabela();
                 Alerta.msgInformacao("Registro Excluído com Sucesso");
@@ -167,7 +168,6 @@ public class ControllerTipoContratoView implements Initializable, IntCadastro {
     void atualizarListaClick(MouseEvent event) {
         atualizarTabela();
     }
-
 
     @FXML
     void clicarSelecionar(MouseEvent event) {

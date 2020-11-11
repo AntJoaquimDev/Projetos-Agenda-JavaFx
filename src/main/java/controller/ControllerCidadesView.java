@@ -69,7 +69,7 @@ public class ControllerCidadesView implements Initializable,IntCadastro {
         if (CidadeDao.liberarExlcusao(objSelecionado.getId())) {
 
             if (Alerta.msgConfimarExclusao(tfDescricao.getText())) {
-                dao.excluis(objSelecionado);
+                dao.excluir(objSelecionado);
                 limparCamposFormes();
                 atualizarTabela();
                 Alerta.msgInformacao("Registro Excluído com Sucesso");

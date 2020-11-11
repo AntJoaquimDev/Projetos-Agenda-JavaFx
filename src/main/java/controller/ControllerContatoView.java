@@ -114,15 +114,6 @@ public class ControllerContatoView implements Initializable, IntCadastro {
         seteCamposFormes();
     }
 
-    @FXML
-    void pesquisarRegistro(KeyEvent event) {
-        atualizarTabela();
-    }
-
-    @FXML
-    void atualizarListaClick(MouseEvent event) {
-        atualizarTabela();
-    }
 
     // imp para acessar os mtd tipoContatodao
     private ComboBoxGenericDao<TipoContato> comboBoxTipoContatodao = new ComboBoxGenericDao();
@@ -198,12 +189,22 @@ public class ControllerContatoView implements Initializable, IntCadastro {
     void deletarRegistro(ActionEvent event) {
 
         if (Alerta.msgConfimarExclusao(tfDescricao.getText())) {
-            dao.excluis(objetoSelecionado);
+            dao.excluir(objetoSelecionado);
             limparCamposFormes();
             atualizarTabela();
             Alerta.msgInformacao("Registro foi excluido com Sucesso.");
         }
 
+    }
+
+    @FXML
+    void pesquisarRegistro(KeyEvent event) {
+        atualizarTabela();
+    }
+
+    @FXML
+    void atualizarListaClick(MouseEvent event) {
+        atualizarTabela();
     }
 
     @FXML

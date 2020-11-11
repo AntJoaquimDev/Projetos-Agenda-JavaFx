@@ -116,7 +116,7 @@ public class ControllerTelaInicialView implements Initializable {
         //scene.getStylesheets().add("/stylesCSS/Styles.css");
         stage.setTitle(titulo);
         stage.setResizable(false);
-        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.show();
     }
