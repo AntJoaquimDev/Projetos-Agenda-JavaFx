@@ -25,7 +25,7 @@ public class MascarsCampo {
     }
 
     public static void mskNumero(TextField textField) {
-        MascarsCampo.limitarTamanhoCampo(textField, 8);
+        MascarsCampo.limitarTamanhoCampo(textField, 11);
 
         textField.lengthProperty().addListener((observable, oldValue, newValue) -> {
             String textoDigitado = textField.getText();
